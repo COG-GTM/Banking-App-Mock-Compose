@@ -29,10 +29,18 @@ class EditProfileViewModel(
     private val _state = MutableStateFlow(EditProfileState())
     val state = _state.asStateFlow()
 
-    private val errorHandler = CoroutineExceptionHandler { _, e ->
+    private val loadErrorHandler = CoroutineExceptionHandler { _, e ->
         _state.update {
             it.copy(
                 isLoading = false,
+                error = ErrorType.fromThrowable(e).asUiTextError()
+            )
+        }
+    }
+
+    private val saveErrorHandler = CoroutineExceptionHandler { _, e ->
+        _state.update {
+            it.copy(
                 isSaving = false,
                 saveEvent = triggered(OperationResult.Failure(AppError(ErrorType.fromThrowable(e))))
             )
@@ -59,7 +67,7 @@ class EditProfileViewModel(
     }
 
     private fun loadProfile() {
-        viewModelScope.launch(errorHandler) {
+        viewModelScope.launch(loadErrorHandler) {
             val profile = getCompactProfileUseCase.execute()
             _state.update {
                 it.copy(
@@ -78,9 +86,10 @@ class EditProfileViewModel(
 
         val firstNameResult = validateNameUseCase.execute(currentState.firstName.value)
         val lastNameResult = validateNameUseCase.execute(currentState.lastName.value)
+        val nickNameResult = validateNameUseCase.execute(currentState.nickName.value)
         val emailResult = validateEmailUseCase.execute(currentState.email.value)
 
-        val hasErrors = listOf(firstNameResult, lastNameResult, emailResult).any { !it.isValid }
+        val hasErrors = listOf(firstNameResult, lastNameResult, nickNameResult, emailResult).any { !it.isValid }
 
         _state.update {
             it.copy(
@@ -89,6 +98,9 @@ class EditProfileViewModel(
                 ),
                 lastName = it.lastName.copy(
                     error = lastNameResult.validationError?.asUiTextError()
+                ),
+                nickName = it.nickName.copy(
+                    error = nickNameResult.validationError?.asUiTextError()
                 ),
                 email = it.email.copy(
                     error = emailResult.validationError?.asUiTextError()
@@ -100,7 +112,7 @@ class EditProfileViewModel(
 
         _state.update { it.copy(isSaving = true) }
 
-        viewModelScope.launch(errorHandler) {
+        viewModelScope.launch(saveErrorHandler) {
             updateProfileUseCase.execute(
                 firstName = currentState.firstName.value,
                 lastName = currentState.lastName.value,
