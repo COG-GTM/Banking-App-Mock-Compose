@@ -49,7 +49,7 @@ class EditProfileViewModel(
 
     fun emitIntent(intent: EditProfileIntent) {
         when (intent) {
-            is EditProfileIntent.EnterScreen -> loadProfile()
+            is EditProfileIntent.EnterScreen -> if (_state.value.isLoading) loadProfile()
             is EditProfileIntent.FirstNameChanged -> {
                 _state.update { it.copy(firstName = UiField(value = intent.value)) }
             }
