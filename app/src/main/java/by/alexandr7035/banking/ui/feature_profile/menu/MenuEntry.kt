@@ -14,6 +14,7 @@ sealed class MenuEntry(
 //    object ChangeEmail : MenuEntry(UiText.StringResource(R.string.change_email_address))
 //    object ChangePassword : MenuEntry(UiText.StringResource(R.string.change_password))
 //    object AccountSecurity : MenuEntry(UiText.StringResource(R.string.account_security))
+    object EditProfile : MenuEntry(UiText.StringResource(R.string.change_personal_profile), R.drawable.ic_edit_profile)
     object Help : MenuEntry(UiText.StringResource(R.string.help_and_privacy), R.drawable.ic_help)
     object AppSettings : MenuEntry(UiText.StringResource(R.string.app_settings), R.drawable.ic_settings)
 }

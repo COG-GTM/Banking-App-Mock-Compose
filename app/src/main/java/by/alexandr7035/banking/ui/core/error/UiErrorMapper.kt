@@ -25,6 +25,7 @@ fun ErrorType.asUiTextError(): UiText {
 
         ErrorType.INVALID_PASSWORD_FIELD -> UiText.StringResource(R.string.invalid_password_field)
         ErrorType.INVALID_EMAIL_FIELD ->  UiText.StringResource(R.string.invalid_email_field)
+        ErrorType.INVALID_NAME_FIELD -> UiText.StringResource(R.string.invalid_name_field)
 
         ErrorType.UNKNOWN_ERROR ->  UiText.StringResource(R.string.unknown_error)
 

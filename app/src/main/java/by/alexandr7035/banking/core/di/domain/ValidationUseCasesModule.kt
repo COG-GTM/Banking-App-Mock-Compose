@@ -6,6 +6,7 @@ import by.alexandr7035.banking.domain.features.validation.ValidateCardHolderUseC
 import by.alexandr7035.banking.domain.features.validation.ValidateCardNumberUseCase
 import by.alexandr7035.banking.domain.features.validation.ValidateCvvCodeUseCase
 import by.alexandr7035.banking.domain.features.validation.ValidateEmailUseCase
+import by.alexandr7035.banking.domain.features.validation.ValidateNameUseCase
 import by.alexandr7035.banking.domain.features.validation.ValidatePasswordUseCase
 import org.koin.dsl.module
 
@@ -17,4 +18,5 @@ val validationUseCasesModule = module {
     factory { ValidateCardHolderUseCase() }
     factory { ValidatePasswordUseCase() }
     factory { ValidateEmailUseCase() }
+    factory { ValidateNameUseCase() }
 }

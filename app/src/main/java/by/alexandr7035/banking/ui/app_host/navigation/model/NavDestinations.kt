@@ -36,6 +36,8 @@ sealed class NavDestinations {
 
         object Help: NavDestinations()
 
+        object EditProfile: NavDestinations()
+
         object AppSettings: NavDestinations()
     }
 
