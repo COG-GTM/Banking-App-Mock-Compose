@@ -74,6 +74,16 @@ fun EditProfileScreen(
         }
     }
 
+    LaunchedEffect(state.error) {
+        val errorText = state.error
+        if (errorText != null && !state.isLoading) {
+            snackBarState.show(
+                message = errorText.asString(context),
+                snackBarMode = SnackBarMode.Negative
+            )
+        }
+    }
+
     if (state.isLoading || state.isSaving) {
         FullscreenProgressBar()
     }

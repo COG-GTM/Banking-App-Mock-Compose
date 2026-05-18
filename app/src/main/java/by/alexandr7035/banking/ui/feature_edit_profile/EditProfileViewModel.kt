@@ -6,6 +6,7 @@ import by.alexandr7035.banking.domain.core.ErrorType
 import by.alexandr7035.banking.domain.core.OperationResult
 import by.alexandr7035.banking.domain.features.profile.GetCompactProfileUseCase
 import by.alexandr7035.banking.domain.features.profile.UpdateProfileUseCase
+import by.alexandr7035.banking.domain.features.profile.model.CompactProfile
 import by.alexandr7035.banking.ui.core.error.asUiTextError
 import by.alexandr7035.banking.ui.feature_cards.screen_add_card.UiField
 import de.palm.composestateevents.consumed
@@ -67,6 +68,7 @@ class EditProfileViewModel(
                     email = UiField(value = profile.email),
                     profilePicUrl = profile.profilePicUrl,
                     profileId = profile.id,
+                    profileTier = profile.tier,
                 )
             }
         }
@@ -95,12 +97,14 @@ class EditProfileViewModel(
         _state.update { it.copy(isSaving = true) }
 
         viewModelScope.launch(errorHandler) {
-            val profile = getCompactProfileUseCase.execute()
-            val updatedProfile = profile.copy(
+            val updatedProfile = CompactProfile(
+                id = current.profileId,
                 firstName = current.firstName.value.trim(),
                 lastName = current.lastName.value.trim(),
                 nickName = current.nickName.value.trim(),
                 email = current.email.value.trim(),
+                profilePicUrl = current.profilePicUrl,
+                tier = current.profileTier,
             )
 
             val result = OperationResult.runWrapped {
