@@ -11,20 +11,27 @@ plugins {
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
-val keystoreProperties = Properties().apply {
-    load(FileInputStream(keystorePropertiesFile))
+val hasKeystore = keystorePropertiesFile.exists() && keystorePropertiesFile.length() > 0
+val keystoreProperties = Properties().also { props ->
+    if (hasKeystore) props.load(FileInputStream(keystorePropertiesFile))
 }
 
 android {
     namespace = "by.alexandr7035.banking"
     compileSdk = 35
 
-    signingConfigs {
-        create("config") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
+    if (hasKeystore) {
+        val keyAlias = keystoreProperties["keyAlias"] as String
+        val keyPassword = keystoreProperties["keyPassword"] as String
+        val storeFile = keystoreProperties["storeFile"] as String
+        val storePassword = keystoreProperties["storePassword"] as String
+        signingConfigs {
+            create("config") {
+                this.keyAlias = keyAlias
+                this.keyPassword = keyPassword
+                this.storeFile = file(storeFile)
+                this.storePassword = storePassword
+            }
         }
     }
 
@@ -41,7 +48,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("config")
+            if (hasKeystore) signingConfig = signingConfigs.getByName("config")
             isMinifyEnabled = true
             proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -49,7 +56,7 @@ android {
             )
         }
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("config")
+            if (hasKeystore) signingConfig = signingConfigs.getByName("config")
             applicationIdSuffix = ".debug"
             isDebuggable = true
             versionNameSuffix = ".debug"
@@ -70,6 +77,35 @@ android {
 
     packaging {
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+    }
+
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("smallPhoneApi27") {
+                    device = "Nexus 5"
+                    apiLevel = 27
+                    systemImageSource = "google"
+                }
+                create("mediumPhoneApi30") {
+                    device = "Pixel 3a"
+                    apiLevel = 30
+                    systemImageSource = "google-atd"
+                }
+                create("largePhoneApi34") {
+                    device = "Pixel 6"
+                    apiLevel = 34
+                    systemImageSource = "google-atd"
+                }
+            }
+            groups {
+                create("allDevices") {
+                    targetDevices.add(localDevices["smallPhoneApi27"])
+                    targetDevices.add(localDevices["mediumPhoneApi30"])
+                    targetDevices.add(localDevices["largePhoneApi34"])
+                }
+            }
+        }
     }
 }
 

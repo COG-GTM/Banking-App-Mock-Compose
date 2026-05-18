@@ -18,6 +18,7 @@ import by.alexandr7035.banking.ui.feature_contacts.scanned_contact.ScannedContac
 import by.alexandr7035.banking.ui.feature_home.HomeViewModel
 import by.alexandr7035.banking.ui.feature_login.LoginViewModel
 import by.alexandr7035.banking.ui.feature_onboarding.OnboardingViewModel
+import by.alexandr7035.banking.ui.feature_edit_profile.EditProfileViewModel
 import by.alexandr7035.banking.ui.feature_profile.ProfileViewModel
 import by.alexandr7035.banking.ui.feature_qr_codes.DisplayQrViewModel
 import by.alexandr7035.banking.ui.feature_savings.SavingsViewModel
@@ -214,6 +215,15 @@ val presentationModule = module {
             checkIfBiometricsAvailableUseCase = get(),
             checkAppLockedWithBiometricsUseCase = get(),
             lockAppLockedWithBiometricsUseCase = get(),
+        )
+    }
+
+    viewModel {
+        EditProfileViewModel(
+            getCompactProfileUseCase = get(),
+            updateProfileUseCase = get(),
+            validateNameUseCase = get(),
+            validateEmailUseCase = get(),
         )
     }
 }
