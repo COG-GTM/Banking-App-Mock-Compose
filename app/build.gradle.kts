@@ -78,6 +78,35 @@ android {
     packaging {
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
+
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("smallPhoneApi27") {
+                    device = "Nexus 5"
+                    apiLevel = 27
+                    systemImageSource = "google"
+                }
+                create("mediumPhoneApi30") {
+                    device = "Pixel 3a"
+                    apiLevel = 30
+                    systemImageSource = "google-atd"
+                }
+                create("largePhoneApi34") {
+                    device = "Pixel 6"
+                    apiLevel = 34
+                    systemImageSource = "google-atd"
+                }
+            }
+            groups {
+                create("allDevices") {
+                    targetDevices.add(localDevices["smallPhoneApi27"])
+                    targetDevices.add(localDevices["mediumPhoneApi30"])
+                    targetDevices.add(localDevices["largePhoneApi34"])
+                }
+            }
+        }
+    }
 }
 
 dependencies {
