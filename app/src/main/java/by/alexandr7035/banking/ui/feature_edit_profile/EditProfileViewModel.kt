@@ -49,7 +49,10 @@ class EditProfileViewModel(
 
     fun emitIntent(intent: EditProfileIntent) {
         when (intent) {
-            is EditProfileIntent.EnterScreen -> if (_state.value.isLoading) loadProfile()
+            is EditProfileIntent.EnterScreen -> {
+                val current = _state.value
+                if (current.isLoading || current.error != null) loadProfile()
+            }
             is EditProfileIntent.FirstNameChanged -> {
                 _state.update { it.copy(firstName = UiField(value = intent.value)) }
             }
@@ -67,6 +70,7 @@ class EditProfileViewModel(
     }
 
     private fun loadProfile() {
+        _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch(loadErrorHandler) {
             val profile = getCompactProfileUseCase.execute()
             _state.update {

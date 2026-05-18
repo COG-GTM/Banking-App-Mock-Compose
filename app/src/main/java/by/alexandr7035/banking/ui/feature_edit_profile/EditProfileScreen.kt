@@ -26,6 +26,7 @@ import by.alexandr7035.banking.ui.components.FullscreenProgressBar
 import by.alexandr7035.banking.ui.components.PrimaryButton
 import by.alexandr7035.banking.ui.components.ScreenPreview
 import by.alexandr7035.banking.ui.components.SecondaryToolBar
+import by.alexandr7035.banking.ui.components.error.ErrorFullScreen
 import by.alexandr7035.banking.ui.components.forms.DecoratedFormField
 import by.alexandr7035.banking.ui.components.snackbar.SnackBarMode
 import by.alexandr7035.banking.ui.core.error.asUiTextError
@@ -98,57 +99,67 @@ internal fun EditProfileScreen_Ui(
             title = UiText.StringResource(R.string.edit_profile),
         )
 
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp)
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
+        when {
+            state.error != null -> {
+                ErrorFullScreen(
+                    error = state.error,
+                    onRetry = { onIntent(EditProfileIntent.EnterScreen) }
+                )
+            }
+            else -> {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 24.dp)
+                ) {
+                    Spacer(modifier = Modifier.height(16.dp))
 
-            DecoratedFormField(
-                modifier = Modifier.fillMaxWidth(),
-                fieldTitle = UiText.StringResource(R.string.first_name),
-                uiField = state.firstName,
-                onValueChange = { onIntent(EditProfileIntent.FirstNameChanged(it)) },
-            )
+                    DecoratedFormField(
+                        modifier = Modifier.fillMaxWidth(),
+                        fieldTitle = UiText.StringResource(R.string.first_name),
+                        uiField = state.firstName,
+                        onValueChange = { onIntent(EditProfileIntent.FirstNameChanged(it)) },
+                    )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-            DecoratedFormField(
-                modifier = Modifier.fillMaxWidth(),
-                fieldTitle = UiText.StringResource(R.string.last_name),
-                uiField = state.lastName,
-                onValueChange = { onIntent(EditProfileIntent.LastNameChanged(it)) },
-            )
+                    DecoratedFormField(
+                        modifier = Modifier.fillMaxWidth(),
+                        fieldTitle = UiText.StringResource(R.string.last_name),
+                        uiField = state.lastName,
+                        onValueChange = { onIntent(EditProfileIntent.LastNameChanged(it)) },
+                    )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-            DecoratedFormField(
-                modifier = Modifier.fillMaxWidth(),
-                fieldTitle = UiText.StringResource(R.string.nickname),
-                uiField = state.nickName,
-                onValueChange = { onIntent(EditProfileIntent.NickNameChanged(it)) },
-            )
+                    DecoratedFormField(
+                        modifier = Modifier.fillMaxWidth(),
+                        fieldTitle = UiText.StringResource(R.string.nickname),
+                        uiField = state.nickName,
+                        onValueChange = { onIntent(EditProfileIntent.NickNameChanged(it)) },
+                    )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-            DecoratedFormField(
-                modifier = Modifier.fillMaxWidth(),
-                fieldTitle = UiText.StringResource(R.string.email_address),
-                uiField = state.email,
-                onValueChange = { onIntent(EditProfileIntent.EmailChanged(it)) },
-            )
+                    DecoratedFormField(
+                        modifier = Modifier.fillMaxWidth(),
+                        fieldTitle = UiText.StringResource(R.string.email_address),
+                        uiField = state.email,
+                        onValueChange = { onIntent(EditProfileIntent.EmailChanged(it)) },
+                    )
 
-            Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(32.dp))
 
-            PrimaryButton(
-                onClick = { onIntent(EditProfileIntent.SaveProfile) },
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(id = R.string.save_changes),
-            )
+                    PrimaryButton(
+                        onClick = { onIntent(EditProfileIntent.SaveProfile) },
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.save_changes),
+                    )
 
-            Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(32.dp))
+                }
+            }
         }
     }
 

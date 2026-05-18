@@ -279,6 +279,37 @@ class EditProfileScreenTest {
         composeTestRule.onNodeWithText(emailError).assertIsDisplayed()
     }
 
+    // --- Test: Load error shows ErrorFullScreen with retry ---
+
+    @Test
+    fun editProfileScreen_showsErrorScreenOnLoadFailure() {
+        val errorText = context.getString(R.string.unknown_error)
+        val emittedIntents = mutableListOf<EditProfileIntent>()
+        val errorState = EditProfileState(
+            isLoading = false,
+            error = UiText.StringResource(R.string.unknown_error),
+        )
+
+        composeTestRule.setContent {
+            ScreenPreview {
+                EditProfileScreen_Ui(
+                    state = errorState,
+                    onIntent = { emittedIntents.add(it) }
+                )
+            }
+        }
+
+        composeTestRule.onNodeWithText(errorText).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertIsDisplayed()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).performClick()
+
+        assertTrue(
+            "Expected EnterScreen intent on retry",
+            emittedIntents.any { it is EditProfileIntent.EnterScreen }
+        )
+    }
+
     // --- Test: Loading state shows progress ---
 
     @Test
