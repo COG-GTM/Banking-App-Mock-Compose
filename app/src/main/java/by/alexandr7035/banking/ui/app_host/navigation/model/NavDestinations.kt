@@ -34,6 +34,8 @@ sealed class NavDestinations {
         object SavingsList: NavDestinations()
         object SavingDetails: NavDestinations()
 
+        object PasswordHealth: NavDestinations()
+
         object Help: NavDestinations()
 
         object AppSettings: NavDestinations()

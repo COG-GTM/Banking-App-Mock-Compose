@@ -248,6 +248,8 @@ private fun ProfileScreen_Ui(
 
         MenuItemsList(
             items = listOf(
+                MenuItem.Section(UiText.DynamicString("Security")),
+                MenuItem.Item(MenuEntry.PasswordHealth),
                 MenuItem.Section(UiText.DynamicString("More")),
                 MenuItem.Item(MenuEntry.Help),
                 MenuItem.Item(MenuEntry.AppSettings),

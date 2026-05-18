@@ -28,6 +28,7 @@ import by.alexandr7035.banking.ui.feature_app_settings.AppSettingsScreen
 import by.alexandr7035.banking.ui.feature_help.HelpScreen
 import by.alexandr7035.banking.ui.feature_login.LoginScreen
 import by.alexandr7035.banking.ui.feature_onboarding.OnboardingScreen
+import by.alexandr7035.banking.ui.feature_password_health.PasswordHealthScreen
 import by.alexandr7035.banking.ui.feature_profile.ProfileScreen
 import by.alexandr7035.banking.ui.feature_profile.menu.MenuEntry
 import by.alexandr7035.banking.ui.feature_savings.SavingsScreen
@@ -188,6 +189,7 @@ fun AppNavHost(
                     },
                     onMenuEntry = {
                         val route = when (it) {
+                            MenuEntry.PasswordHealth -> NavDestinations.RootGraph.PasswordHealth.route
                             MenuEntry.Help -> NavDestinations.RootGraph.Help.route
                             MenuEntry.AppSettings -> NavDestinations.RootGraph.AppSettings.route
                             else -> error("No route specified for setting $it")
@@ -318,6 +320,14 @@ fun AppNavHost(
                         navController.popBackStack()
                     },
                     selectedCardId = selectedCard
+                )
+            }
+
+            composable(NavDestinations.RootGraph.PasswordHealth.route) {
+                PasswordHealthScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    }
                 )
             }
 

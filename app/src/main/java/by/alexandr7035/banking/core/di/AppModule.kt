@@ -10,6 +10,7 @@ import by.alexandr7035.banking.core.di.domain.contactsModule
 import by.alexandr7035.banking.core.di.domain.loginUseCasesModule
 import by.alexandr7035.banking.core.di.domain.onboardingModule
 import by.alexandr7035.banking.core.di.domain.otpUseCasesModule
+import by.alexandr7035.banking.core.di.domain.passwordHealthModule
 import by.alexandr7035.banking.core.di.domain.profileUseCasesModule
 import by.alexandr7035.banking.core.di.domain.savingsUseCasesModule
 import by.alexandr7035.banking.core.di.domain.signUpModule
@@ -34,6 +35,7 @@ val appModule = module {
     includes(transactionsModule)
     includes(contactsModule)
     includes(connectionsModule)
+    includes(passwordHealthModule)
 
     includes(dataModule)
     includes(presentationModule)

@@ -9,6 +9,7 @@ import by.alexandr7035.banking.data.app.AppSettignsRepository
 import by.alexandr7035.banking.data.app_lock.AppLockRepositoryImpl
 import by.alexandr7035.banking.data.cards.CardsRepositoryMock
 import by.alexandr7035.banking.data.contacts.ContactsRepositoryMock
+import by.alexandr7035.banking.data.password_health.PasswordHealthRepositoryMock
 import by.alexandr7035.banking.data.db.CacheDatabase
 import by.alexandr7035.banking.data.db.convertors.MoneyAmountConvertor
 import by.alexandr7035.banking.data.login.LoginRepositoryMock
@@ -23,6 +24,7 @@ import by.alexandr7035.banking.domain.features.cards.CardsRepository
 import by.alexandr7035.banking.domain.features.contacts.ContactsRepository
 import by.alexandr7035.banking.domain.features.login.LoginRepository
 import by.alexandr7035.banking.domain.features.otp.OtpRepository
+import by.alexandr7035.banking.domain.features.password_health.PasswordHealthRepository
 import by.alexandr7035.banking.domain.features.profile.ProfileRepository
 import by.alexandr7035.banking.domain.features.savings.SavingsRepository
 import by.alexandr7035.banking.domain.features.signup.SignUpRepository
@@ -146,5 +148,9 @@ val dataModule = module {
 
     single<ContactsRepository> {
         ContactsRepositoryMock()
+    }
+
+    single<PasswordHealthRepository> {
+        PasswordHealthRepositoryMock()
     }
 }

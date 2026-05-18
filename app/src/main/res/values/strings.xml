@@ -134,4 +134,7 @@
     <string name="app_lock">App Lock</string>
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
+    <string name="password_health">Password Health</string>
+    <string name="reused_passwords">Reused Passwords</string>
+    <string name="no_reused_passwords">No reused passwords detected.</string>
 </resources>

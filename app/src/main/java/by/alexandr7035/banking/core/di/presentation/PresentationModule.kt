@@ -13,6 +13,7 @@ import by.alexandr7035.banking.ui.feature_cards.dialog_card_picker.CardPickerVie
 import by.alexandr7035.banking.ui.feature_cards.screen_add_card.AddCardViewModel
 import by.alexandr7035.banking.ui.feature_cards.screen_card_details.CardDetailsViewModel
 import by.alexandr7035.banking.ui.feature_cards.screen_card_list.CardListViewModel
+import by.alexandr7035.banking.ui.feature_password_health.PasswordHealthViewModel
 import by.alexandr7035.banking.ui.feature_contacts.dialog_contact_picker.ContactPickerDialogViewModel
 import by.alexandr7035.banking.ui.feature_contacts.scanned_contact.ScannedContactViewModel
 import by.alexandr7035.banking.ui.feature_home.HomeViewModel
@@ -214,6 +215,12 @@ val presentationModule = module {
             checkIfBiometricsAvailableUseCase = get(),
             checkAppLockedWithBiometricsUseCase = get(),
             lockAppLockedWithBiometricsUseCase = get(),
+        )
+    }
+
+    viewModel {
+        PasswordHealthViewModel(
+            getReusedPasswordGroupsUseCase = get()
         )
     }
 }
