@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="x_accounts_use_this_password">
+        <item quantity="one">%d account uses this password</item>
+        <item quantity="other">%d accounts use this password</item>
+    </plurals>
+</resources>
