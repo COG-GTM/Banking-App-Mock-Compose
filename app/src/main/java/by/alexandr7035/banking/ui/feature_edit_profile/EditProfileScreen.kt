@@ -77,7 +77,7 @@ fun EditProfileScreen(
 }
 
 @Composable
-private fun EditProfileScreen_Ui(
+internal fun EditProfileScreen_Ui(
     state: EditProfileState,
     onIntent: (EditProfileIntent) -> Unit = {},
     onBack: () -> Unit = {},
