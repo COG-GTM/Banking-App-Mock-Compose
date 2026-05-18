@@ -28,6 +28,7 @@ import by.alexandr7035.banking.ui.feature_app_settings.AppSettingsScreen
 import by.alexandr7035.banking.ui.feature_help.HelpScreen
 import by.alexandr7035.banking.ui.feature_login.LoginScreen
 import by.alexandr7035.banking.ui.feature_onboarding.OnboardingScreen
+import by.alexandr7035.banking.ui.feature_edit_profile.EditProfileScreen
 import by.alexandr7035.banking.ui.feature_profile.ProfileScreen
 import by.alexandr7035.banking.ui.feature_profile.menu.MenuEntry
 import by.alexandr7035.banking.ui.feature_savings.SavingsScreen
@@ -194,6 +195,17 @@ fun AppNavHost(
                         }
 
                         navController.navigate(route)
+                    },
+                    onEditProfile = {
+                        navController.navigate(NavDestinations.RootGraph.EditProfile.route)
+                    }
+                )
+            }
+
+            composable(NavDestinations.RootGraph.EditProfile.route) {
+                EditProfileScreen(
+                    onBack = {
+                        navController.popBackStack()
                     }
                 )
             }

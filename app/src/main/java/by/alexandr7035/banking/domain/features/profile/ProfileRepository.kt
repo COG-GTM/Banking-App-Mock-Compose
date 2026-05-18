@@ -4,4 +4,5 @@ import by.alexandr7035.banking.domain.features.profile.model.CompactProfile
 
 interface ProfileRepository {
     suspend fun getCompactProfile(): CompactProfile
+    suspend fun updateProfile(profile: CompactProfile)
 }
