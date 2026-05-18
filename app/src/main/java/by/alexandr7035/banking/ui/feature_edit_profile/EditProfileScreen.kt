@@ -43,10 +43,6 @@ fun EditProfileScreen(
     val snackBarState = LocalScopedSnackbarState.current
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
-        viewModel.emitIntent(EditProfileScreenIntent.EnterScreen)
-    }
-
     EditProfileScreen_Ui(
         state = state,
         onIntent = { viewModel.emitIntent(it) },
