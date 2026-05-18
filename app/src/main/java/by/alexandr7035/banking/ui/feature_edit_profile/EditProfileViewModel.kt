@@ -25,10 +25,6 @@ class EditProfileViewModel(
     private val _state = MutableStateFlow(EditProfileScreenState())
     val state = _state.asStateFlow()
 
-    init {
-        loadProfile()
-    }
-
     private val errorHandler = CoroutineExceptionHandler { _, e ->
         _state.update {
             it.copy(
@@ -37,6 +33,10 @@ class EditProfileViewModel(
                 error = ErrorType.fromThrowable(e).asUiTextError()
             )
         }
+    }
+
+    init {
+        loadProfile()
     }
 
     fun emitIntent(intent: EditProfileScreenIntent) {
