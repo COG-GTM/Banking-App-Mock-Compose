@@ -59,6 +59,14 @@ fun PasswordHealthScreen(
         viewModel.emitIntent(PasswordHealthIntent.LoadData)
     }
 
+    PasswordHealthScreenContent(state = state, onBack = onBack)
+}
+
+@Composable
+fun PasswordHealthScreenContent(
+    state: PasswordHealthState,
+    onBack: () -> Unit = {}
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {

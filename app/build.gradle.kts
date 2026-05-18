@@ -71,6 +71,36 @@ android {
     packaging {
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
+
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("smallPhone") {
+                    device = "Pixel 4a"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+                create("largePhone") {
+                    device = "Pixel 6 Pro"
+                    apiLevel = 33
+                    systemImageSource = "aosp-atd"
+                }
+                create("tablet") {
+                    device = "Pixel C"
+                    apiLevel = 30
+                    systemImageSource = "aosp-atd"
+                }
+            }
+            groups {
+                create("allDevices") {
+                    targetDevices.add(devices["smallPhone"])
+                    targetDevices.add(devices["largePhone"])
+                    targetDevices.add(devices["tablet"])
+                }
+            }
+        }
+    }
 }
 
 dependencies {
