@@ -3,6 +3,7 @@ package by.alexandr7035.banking.ui.feature_profile.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,7 +46,8 @@ import com.valentinilk.shimmer.shimmer
 @Composable
 fun ProfileCard(
     profile: ProfileUi?,
-    isLoading: Boolean
+    isLoading: Boolean,
+    onEditClick: () -> Unit = {},
 ) {
     PrimaryCard(
         modifier = Modifier
@@ -54,14 +56,14 @@ fun ProfileCard(
         paddingValues = PaddingValues(16.dp)
     ) {
         when {
-            profile != null -> ProfileCard_Content(profile = profile)
+            profile != null -> ProfileCard_Content(profile = profile, onEditClick = onEditClick)
             isLoading -> ProfileCard_Skeleton()
         }
     }
 }
 
 @Composable
-private fun ProfileCard_Content(profile: ProfileUi) {
+private fun ProfileCard_Content(profile: ProfileUi, onEditClick: () -> Unit = {}) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         // Avatar container
         Box(modifier = Modifier.size(48.dp), contentAlignment = Alignment.BottomEnd) {
@@ -83,8 +85,10 @@ private fun ProfileCard_Content(profile: ProfileUi) {
 
             Image(
                 painter = painterResource(id = R.drawable.ic_edit_profile),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp)
+                contentDescription = "Edit profile",
+                modifier = Modifier
+                    .size(16.dp)
+                    .clickable { onEditClick() }
             )
         }
 

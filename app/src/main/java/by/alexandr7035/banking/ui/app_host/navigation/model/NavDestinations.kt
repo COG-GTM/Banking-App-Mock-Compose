@@ -37,6 +37,8 @@ sealed class NavDestinations {
         object Help: NavDestinations()
 
         object AppSettings: NavDestinations()
+
+        object EditProfile: NavDestinations()
     }
 
     val route: String

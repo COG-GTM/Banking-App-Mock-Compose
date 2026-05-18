@@ -68,7 +68,8 @@ import org.koin.androidx.compose.koinViewModel
 fun ProfileScreen(
     viewModel: ProfileViewModel = koinViewModel(),
     onMenuEntry: (entry: MenuEntry) -> Unit = {},
-    onLogoutCompleted: () -> Unit = {}
+    onLogoutCompleted: () -> Unit = {},
+    onEditProfile: () -> Unit = {},
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
     val context = LocalContext.current
@@ -93,6 +94,7 @@ fun ProfileScreen(
             onShowMyQrDialog = {
                 viewModel.emitIntent(ProfileScreenIntent.ToggleMyQrDialog(isShown = true))
             },
+            onEditProfile = onEditProfile,
             onShowScanQrDialog = {
                 val checkPermission = permissionHelper.checkIfPermissionGranted(context, android.Manifest.permission.CAMERA)
                 if (checkPermission == CheckPermissionResult.PERMISSION_ALREADY_GRANTED) {
@@ -204,7 +206,8 @@ private fun ProfileScreen_Ui(
     onLogoutIntent: (intent: LogoutIntent) -> Unit = {},
     onMenyEntry: (entry: MenuEntry) -> Unit = {},
     onShowMyQrDialog: () -> Unit = {},
-    onShowScanQrDialog: () -> Unit = {}
+    onShowScanQrDialog: () -> Unit = {},
+    onEditProfile: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.then(
@@ -213,7 +216,11 @@ private fun ProfileScreen_Ui(
         )
     ) {
         ScreenHeader(toolbar = { ProfileToolBar() }) {
-            ProfileCard(profile = state.profile, isLoading = state.isProfileLoading)
+            ProfileCard(
+                profile = state.profile,
+                isLoading = state.isProfileLoading,
+                onEditClick = onEditProfile,
+            )
         }
 
         Row(
