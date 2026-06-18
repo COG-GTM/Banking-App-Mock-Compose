@@ -73,6 +73,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "io.netty") {
+            useVersion("4.1.135.Final")
+            because("CVE-2026-44249 (SNYK-JAVA-IONETTY-17254120): force netty to patched version")
+        }
+    }
+}
+
 dependencies {
     with(libs) {
 
