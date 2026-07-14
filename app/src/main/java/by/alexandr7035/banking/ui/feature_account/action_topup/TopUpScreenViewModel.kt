@@ -64,7 +64,22 @@ class TopUpScreenViewModel(
             }
 
             is TopUpScreenIntent.ProceedClick -> {
+                _state.update {
+                    it.copy(showConfirmationDialog = true)
+                }
+            }
+
+            is TopUpScreenIntent.ConfirmTopUp -> {
+                _state.update {
+                    it.copy(showConfirmationDialog = false)
+                }
                 reduceStartTopUp()
+            }
+
+            is TopUpScreenIntent.DismissConfirmationDialog -> {
+                _state.update {
+                    it.copy(showConfirmationDialog = false)
+                }
             }
 
             is TopUpScreenIntent.DismissSuccessDialog -> {

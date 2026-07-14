@@ -8,5 +8,7 @@ sealed class TopUpScreenIntent {
     data class UpdateSelectedValue(val amount: MoneyAmount): TopUpScreenIntent()
     data class ToggleCardPicker(val show: Boolean): TopUpScreenIntent()
     object ProceedClick: TopUpScreenIntent()
+    object ConfirmTopUp: TopUpScreenIntent()
+    object DismissConfirmationDialog: TopUpScreenIntent()
     object DismissSuccessDialog: TopUpScreenIntent()
 }
