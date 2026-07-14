@@ -46,6 +46,7 @@ import by.alexandr7035.banking.ui.core.permissions.CheckPermissionResult
 import by.alexandr7035.banking.ui.core.permissions.LocalPermissionHelper
 import by.alexandr7035.banking.ui.core.resources.UiText
 import by.alexandr7035.banking.ui.feature_account.AmountPickersState
+import by.alexandr7035.banking.ui.feature_account.MoneyAmountUi
 import by.alexandr7035.banking.ui.feature_account.components.BalanceGridPicker
 import by.alexandr7035.banking.ui.feature_account.components.BalanceSliderPicker
 import by.alexandr7035.banking.ui.feature_cards.components.PanelCardPicker
@@ -216,6 +217,18 @@ private fun TopUpScreen_Ui(
                 }
             },
             defaultSelectedCard = state.cardPickerState.selectedCard?.id
+        )
+    }
+
+    if (state.showConfirmDialog) {
+        ConfirmTopUpDialog(
+            amount = MoneyAmountUi.mapFromDomain(state.amountState.selectedAmount).amountStr,
+            onDismiss = {
+                onIntent(TopUpScreenIntent.ToggleConfirmDialog(show = false))
+            },
+            onConfirm = {
+                onIntent(TopUpScreenIntent.ConfirmTopUp)
+            }
         )
     }
 

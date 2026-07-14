@@ -86,6 +86,9 @@
     <string name="debit">Debit</string>
     <string name="top_up_successfully">Top Up Submitted</string>
     <string name="topup_exaplanation">The amount will be reflected in your account with in few minutes</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_top_up_title">Confirm Top Up</string>
+    <string name="confirm_top_up_message">You are about to top up %1$s. Do you want to proceed?</string>
     <string name="transaction_submitted">Your Transaction Submitted</string>
     <string name="transaction_explanation">The amount will be reflected in your account with in few minutes</string>
     <string name="set_card_as_default">Set card as default</string>
