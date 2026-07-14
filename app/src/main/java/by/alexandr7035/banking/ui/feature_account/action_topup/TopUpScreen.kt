@@ -219,6 +219,17 @@ private fun TopUpScreen_Ui(
         )
     }
 
+    if (state.showConfirmationDialog) {
+        ConfirmTopUpDialog(
+            onConfirm = {
+                onIntent(TopUpScreenIntent.ConfirmTopUp)
+            },
+            onDismiss = {
+                onIntent(TopUpScreenIntent.DismissConfirmationDialog)
+            }
+        )
+    }
+
     if (state.showSuccessDialog) {
         SuccessDialog(
             title = UiText.StringResource(R.string.top_up_successfully),
