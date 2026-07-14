@@ -47,14 +47,14 @@ fun ConfirmTopUpDialog(
         Column(
             modifier = Modifier
                 .background(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.background)
-                .padding(24.dp)
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Image(
-                painter = painterResource(R.drawable.img_success),
+                painter = painterResource(R.drawable.img_logout),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
