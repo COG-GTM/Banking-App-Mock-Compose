@@ -10,7 +10,7 @@ class ValidateBillingAddressUseCase {
     ): ValidationResult {
         // Check only first line
         return if (addressFirstLine.isBlank()) {
-            ValidationResult(true, validationError = ErrorType.FIELD_IS_EMPTY)
+            ValidationResult(isValid = false, validationError = ErrorType.FIELD_IS_EMPTY)
         } else {
             ValidationResult(isValid = true, validationError = null)
         }

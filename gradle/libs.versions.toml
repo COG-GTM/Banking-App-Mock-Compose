@@ -36,6 +36,11 @@ zxingAndroid = "4.3.0"
 expresso = "3.6.1"
 junit = "4.13.2"
 androidxJunit = "1.2.1"
+coroutines = "1.10.2"
+mockk = "1.14.2"
+turbine = "1.2.0"
+archCoreTesting = "2.2.0"
+robolectric = "4.14.1"
 
 [libraries]
 
@@ -98,6 +103,14 @@ androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "archCoreTesting" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "workManager" }
 
 [bundles]
 coil = ["coil-svg", "coil-compose"]
