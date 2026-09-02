@@ -70,6 +70,13 @@ android {
 
     packaging {
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
     }
 }
 
@@ -128,10 +135,19 @@ dependencies {
 
         // Test dependencies
         testImplementation(junit)
+        testImplementation(kotlinx.coroutines.test)
+        testImplementation(mockk)
+        testImplementation(turbine)
+        testImplementation(androidx.arch.core.testing)
+        testImplementation(robolectric)
         androidTestImplementation(androidx.junit)
         androidTestImplementation(androidx.espresso.core)
         androidTestImplementation(platform(compose.bom))
         androidTestImplementation(androidx.ui.test.junit4)
+        androidTestImplementation(room.testing)
+        androidTestImplementation(androidx.work.testing)
+        androidTestImplementation(mockk.android)
+        androidTestImplementation(kotlinx.coroutines.test)
 
         // Debug dependencies
         debugImplementation(compose.tooling)

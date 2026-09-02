@@ -130,7 +130,7 @@ fun SendMoneyScreen(
 
 
 @Composable
-private fun SendMoneyScreen_Ui(
+internal fun SendMoneyScreen_Ui(
     state: SendMoneyScreenState,
     onIntent: (SendMoneyScreenIntent) -> Unit = {},
     onBack: () -> Unit = {}
